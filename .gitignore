@@ -2,3 +2,4 @@
 /app
 Cargo.toml
 Cargo.lock
+_.rs

@@ -1,10 +1,27 @@
-use crate::{app::{AppError, AppResult}, http::{method::{self, Method}, request::query::{self, Query}}};
+use crate::app::{AppError, AppResult};
+use crate::http::request::query::Query;
+use crate::http::Method;
 use std::convert::TryFrom;
 
+#[derive(Debug)]
 pub struct Request {
     method: Method,
     path: String,
     query: Option<Query>,
+}
+
+impl Request {
+    pub fn method(&self) -> &Method {
+        &self.method
+    }
+
+    pub fn path(&self) -> &str {
+        &self.path
+    }
+
+    pub fn query(&self) -> Option<&Query> {
+        self.query.as_ref()
+    }
 }
 
 impl TryFrom<&[u8]> for Request {
@@ -25,7 +42,7 @@ impl TryFrom<&[u8]> for Request {
 
         let method: Method = req_method.parse()?;
 
-        let mut path = "";
+        let mut path = req_url;
 
         let query = match req_url.find("?") {
             Some(value) => {

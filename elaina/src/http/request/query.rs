@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 
+#[derive(Debug)]
 pub struct Query {
     query_string: HashMap<String, String>,
 }

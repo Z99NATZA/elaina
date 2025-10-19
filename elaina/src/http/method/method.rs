@@ -2,6 +2,7 @@ use std::str::FromStr;
 
 use crate::app::{AppError, AppResult};
 
+#[derive(Debug)]
 pub enum Method {
     GET,
     POST,
